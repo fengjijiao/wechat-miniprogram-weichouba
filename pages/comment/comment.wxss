@@ -1,0 +1,8 @@
+/* pages/comment/comment.wxss */
+.image-container {
+  display: inline;
+}
+.image-container image{
+  width: 36rpx;
+  height: 36rpx;
+}

@@ -1,0 +1,89 @@
+<!--pages/comment/comment.wxml-->
+<view class="container">
+<view wx:if="{{hasRequestFinish}}">
+<!--简介开始-->
+  <view class="weui-article" style="background-image:url('http://www.psjia.com/uploads/allimg/110823/214U2C05-0.jpg');background-repeat:no-repeat;background-size:100% 100%;text-align:center;border-radius:10px;">
+    <view class="" style="margin: 0 auto;width:24vw;height:20vh;background-image:url('{{main_data.background}}');background-repeat:no-repeat;background-size:100% 100%;border-radius:10px;"></view>
+    <view class="weui-article__h1">{{main_data.name}}</view>
+    <view class="weui-article__p" style="color:grey;">{{main_data.introduction}}</view>
+  </view>
+<!--简介结束-->
+<!--添加评论开始-->
+  <view wx:if="{{comment_settings.AllowPublication}}">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{error_tip.show}}">{{error_tip.content}}</view>
+    <form bindsubmit="PublicComment">
+      <view class="weui-cell" style="margin-bottom: 25rpx;border: 3rpx solid #000;border-radius: 10rpx;padding: 25rpx;background-color: white;">
+        <view class="weui-cell__bd">
+        <view class="evaluaction">
+        <text style="display:inline;">评分 </text>
+        <block wx:for='{{starMap}}' wx:key=''>
+              <view class='image-container' bindtap='chooseStar'>
+                <image wx:if='{{evaluation.star >= index + 1}}' data-star='{{index + 1}}' src='../../images/starChecked.png' bin></image>
+                <image wx:if='{{evaluation.star < index + 1}}' data-star='{{index + 1}}' src='../../images/starUnChecked.png'></image>
+              </view>
+        </block>
+        <text style="display:inline;"> {{evaluation.note}}</text>
+        </view>
+        <view class="link-top"></view>
+          <textarea
+            class="weui-textarea"
+            bindinput="bindCommentInput"
+            placeholder="请输入评论..."
+            maxlength="200"
+            auto-height="true"
+            style="font-size:1.2em;" />
+          <view class="weui-textarea-counter">{{public_comment.length}}/200</view>
+        </view>
+      </view>
+    <button class="weui-btn" type="primary" disabled="{{!comment_settings.AllowPublicationBtn}}" form-type="submit">发表</button>
+  </form>
+  </view>
+  <view wx:else>
+    <view class="">你没有发表权限!</view>
+  </view>
+<!--添加评论结束-->
+<!--评论开始-->
+  <view class="weui-panel weui-panel_access" wx:if="{{comment_settings.ShowComments}}">
+    <view class="weui-panel__hd">最新评论</view>
+    <view class="weui-panel__bd">
+      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active"  wx:for="{{comment_datas}}" wx:for-index="comment_id" wx:for-item="comment_data" wx:key="comments">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="{{comment_data.avatarUrl}}" style="border-radius:100px;"/>
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title" style="color:#000000;font-family:'楷体';">{{comment_data.nickname}}</view>
+          <block wx:for='{{starMap}}' wx:key=''>
+              <view class='image-container'>
+                <image wx:if='{{comment_data.star >= index + 1}}' data-star='{{index + 1}}' src='../../images/starChecked.png' bin></image>
+                <image wx:if='{{comment_data.star < index + 1}}' data-star='{{index + 1}}' src='../../images/starUnChecked.png'></image>
+              </view>
+        </block>
+          <view class="weui-media-box__desc">{{comment_data.content}}</view>
+          <view class="weui-media-box__desc" style="font-size:11px;">{{comment_data.time}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+<view wx:else>
+  <view class="">你没有查看权限!</view>
+</view>
+  <!--评论结束-->
+  <!--上拉刷新开始-->
+  <view class="weui-loadmore" wx:if="{{comment_settings.LoadingMoreComments}}">
+    <view wx:if="{{comment_settings.NoMoreComments}}">
+        <view class="weui-loadmore__tips"><!--icon type="info" size="12"></icon-->已经到底了</view>
+    </view>
+    <view wx:else>
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+  <!--上拉刷新结束-->
+  </view>
+  <view wx:else>
+    <view class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+</view>

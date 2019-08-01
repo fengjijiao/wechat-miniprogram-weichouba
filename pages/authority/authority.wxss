@@ -1,0 +1,15 @@
+/* pages/authority/authority.wxss */
+.image_center{
+  text-align: center;
+}
+.logo{
+  width: 120rpx;
+  height: 120rpx;
+}
+.text_apply{
+  font-size: 42rpx;
+}
+.text_warn{
+  font-size: 24rpx;
+  color: gray;
+}

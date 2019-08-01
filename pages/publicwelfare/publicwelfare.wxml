@@ -1,0 +1,50 @@
+<!--pages/publicwelfare/publicwelfare.wxml-->
+<view class="container">
+  <view wx:if="{{hasRequestFinish}}">
+      <view class="left">
+        <block wx:for="{{publicwelfares}}" wx:key="">
+          <template is="publicwelfares-template" data="{{...item}}" wx:if="{{index%2==0}}"></template>
+        </block>
+      </view>
+      <view class="right">
+        <block wx:for="{{publicwelfares}}" wx:key="">
+          <template is="publicwelfares-template" data="{{...item}}" wx:if="{{index%2==1}}"></template>
+        </block>
+      </view>
+  <!--上拉刷新开始-->
+  <view class="weui-loadmore" wx:if="{{publicwelfare_settings.LoadingMorePublicwelfares}}">
+    <view wx:if="{{publicwelfare_settings.NoMorePublicwelfares}}">
+        <view class="weui-loadmore__tips">已经到底了</view>
+    </view>
+    <view wx:else>
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+  <!--上拉刷新结束-->
+  </view>
+  <view wx:else>
+    <view class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+</view>
+
+<!--  下面是一个模块 -->
+<template name="publicwelfares-template">
+  <view class="item">
+    <image class="item-img" src="{{ImageUrl}}" mode="widthFix"></image>
+    <view class="item-title-box">
+      <navigator url="" class="item-title">{{Name}}</navigator> 
+    </view>
+    <view class="name">
+      <image class="item-ava" src="{{AvatarUrl}}"></image>    
+      <text class="name-title">{{OrgName}}</text>
+      <view class="heart_">
+        <image class="heart" src="../../images/starChecked.png" style=""></image>
+        <text>{{heart}}</text>
+      </view>
+    </view>
+  </view>
+</template>

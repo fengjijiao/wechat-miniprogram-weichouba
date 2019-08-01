@@ -1,0 +1,55 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+      <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">搜索</view>
+    </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+  </view>
+  <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+    <view wx:for="{{inpuTips}}" wx:for-index="inpuTip_id" wx:for-item="inpuTip" wx:key="inpuTips">
+      <navigator url="{{inpuTip.id}}" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>{{inpuTip.content}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <view class="userinfo" wx:if="{{hasUserInfo}}">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="userinfo-religeon">{{userInfo.country}} {{userInfo.province}} {{userInfo.city}}</text>
+  </view>
+  <view wx:else>
+    <view class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+<view class="Nav">
+<navigator url="../comment/comment?id=1" style="display:inline-block;"><button class="weui-btn mini-btn" type="primary" size="mini">评论测试|员工1</button></navigator>
+<navigator url="../comment/comment?id=2" style="display:inline-block;"><button class="weui-btn mini-btn" type="primary" size="mini">评论测试|员工2</button></navigator>
+<navigator url="../authority/authority" style="display:inline-block;"><button class="weui-btn mini-btn" type="primary" size="mini">授权测试</button></navigator>
+<navigator url="../notice/notice" style="display:inline-block;"><button class="weui-btn mini-btn" type="primary" size="mini">评论后显示公益信息测试</button></navigator>
+<view style="display:inline-block;"><button class="weui-btn mini-btn" type="primary" size="mini" bindtap='scanCode'>扫描二维码测试</button></view>
+</view>
+<!--底部开始-->
+  <!--view class="weui-footer">
+    <view class="weui-footer__links">
+      <navigator url="" class="weui-footer__link">底部链接</navigator>
+      <navigator url="" class="weui-footer__link">底部链接</navigator>
+    </view>
+    <view class="weui-footer__text">Copyright © 2019 {{appInfo.AppName}}</view>
+  </view-->
+<!--底部结束-->
+</view>

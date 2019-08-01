@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/comment/comment",
+    "pages/authority/authority",
+    "pages/publicwelfare/publicwelfare",
+    "pages/notice/notice"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "微筹吧",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/publicwelfare/publicwelfare",
+        "text": "公益"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
